@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class ParkingLot {
     public static final int Max_Capacity = 10;
@@ -7,20 +8,33 @@ public class ParkingLot {
     public static final String NO_AVAILABLE_POSITION = "No available position";
     private Map<Ticket, Car> parkingRecords = new HashMap<>();
     public int capacity;
+    public int parkingLotId;
 
     public ParkingLot() {
         capacity = Max_Capacity;
     }
 
-    private boolean checkCapacity() {
+
+    public ParkingLot(int parkingLotId){
+        capacity = Max_Capacity;
+        this.parkingLotId = parkingLotId;
+    }
+
+    public boolean isMatchParkingLot(Ticket ticket){
+        return ticket.ParkingLotId == this.parkingLotId;
+    }
+
+    public boolean isCapacityFull() {
         return capacity == 0;
     }
 
+
     public Ticket park(Car car) {
-        if (checkCapacity()) {
+        if (isCapacityFull()) {
             throw new ParkingException(NO_AVAILABLE_POSITION) ;
         }
         Ticket ticket = new Ticket();
+        ticket.setParkingLotId(parkingLotId);
         parkingRecords.put(ticket, car);
         capacity--;
         return ticket;
