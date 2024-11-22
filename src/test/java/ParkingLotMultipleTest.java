@@ -87,6 +87,22 @@ public class ParkingLotMultipleTest {
         assertThrows(UnrecognizedParkingTicketException.class, () -> packingBoy.fetch(wrongTicket), UnrecognizedParkingTicketException.UNRECOGNIZED_PARKING_TICKET);
     }
 
+    @Test
+    public void should_return_error_message_and_throw_unrecognized_parking_ticket_exception_when_parking_two_car_and_parking_not_full_given_used_ticket(){
+        //Given
+        ParkingLot firstParkingLot = new ParkingLot(1);
+        ParkingLot secondParkingLot = new ParkingLot(2);
+        PackingBoy packingBoy = new PackingBoy(firstParkingLot);
+        packingBoy.addParkingLots(secondParkingLot);
+        Car car =  new Car();
+        //When
+        Ticket ticket = packingBoy.park(car);
+        packingBoy.fetch(ticket);
+
+        //Then
+        assertThrows(UnrecognizedParkingTicketException.class, () -> packingBoy.fetch(ticket), UnrecognizedParkingTicketException.UNRECOGNIZED_PARKING_TICKET);
+    }
+
 
 
 
