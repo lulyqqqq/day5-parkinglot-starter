@@ -29,4 +29,21 @@ public class ParkingBoy {
         //Then
         assertEquals(car, fetchedCar);
     }
+
+    @Test
+    public void should_return_right_car_and_ticket_when_fetch_given_two_car() {
+        //Given
+        ParkingLot parkingLot = new ParkingLot();
+        PackingBoy packingBoy = new PackingBoy(parkingLot);
+        Car carFirst = new Car();
+        Car carSecond = new Car();
+        Ticket ticketFirst = packingBoy.park(carFirst);
+        Ticket ticketSecond = packingBoy.park(carSecond);
+        //When
+        Car fetchedCarFirst = packingBoy.fetch(ticketFirst);
+        Car fetchedCarSecond = packingBoy.fetch(ticketSecond);
+        //Then
+        assertEquals(carFirst, fetchedCarFirst);
+        assertEquals(carSecond, fetchedCarSecond);
+    }
 }
