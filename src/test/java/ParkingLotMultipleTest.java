@@ -1,7 +1,5 @@
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayOutputStream;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -101,6 +99,23 @@ public class ParkingLotMultipleTest {
 
         //Then
         assertThrows(UnrecognizedParkingTicketException.class, () -> packingBoy.fetch(ticket), UnrecognizedParkingTicketException.UNRECOGNIZED_PARKING_TICKET);
+    }
+
+    @Test
+    public void should_return_error_message_and_throw_no_available_position_exception_when_parking_two_car_and_parking_all_full(){
+        //Given
+        ParkingLot firstParkingLot = new ParkingLot(1);
+        ParkingLot secondParkingLot = new ParkingLot(2);
+        PackingBoy packingBoy = new PackingBoy(firstParkingLot);
+        packingBoy.addParkingLots(secondParkingLot);
+        //When
+        for (int i = 0; i < 20; i++) {
+            packingBoy.park(new Car());
+        }
+        Car car =  new Car();
+
+        //Then
+        assertThrows(NoAvailablePositionException.class, () -> packingBoy.park(car), NoAvailablePositionException.NO_AVAILABLE_POSITION);
     }
 
 
