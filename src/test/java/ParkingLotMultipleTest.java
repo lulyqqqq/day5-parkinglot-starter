@@ -85,8 +85,10 @@ public class ParkingLotMultipleTest {
 
         //Then
         assertThrows(UnrecognizedParkingTicketException.class, () -> packingBoy.fetch(wrongTicket), UnrecognizedParkingTicketException.UNRECOGNIZED_PARKING_TICKET);
-        assertThrows(UnrecognizedParkingTicketException.class, () -> packingBoy.fetch(wrongTicket), UnrecognizedParkingTicketException.UNRECOGNIZED_PARKING_TICKET);
-
     }
+
+
+
+
 
 }
