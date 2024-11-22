@@ -62,7 +62,6 @@ public class ParkingLotTest {
     public void should_return_nothing_catch_exception_when_fetch_car_given_wrong_ticket() {
         //Given
         ParkingLot parkingLot = new ParkingLot();
-        Car car = new Car();
         Ticket wrongTicket = new Ticket();
         //Then
         assertThrows(ParkingException.class, () -> parkingLot.fetch(wrongTicket), ParkingLot.UNRECOGNIZED_PARKING_TICKET);

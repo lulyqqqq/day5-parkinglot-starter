@@ -1,7 +1,6 @@
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingBoy {
 
@@ -46,4 +45,16 @@ public class ParkingBoy {
         assertEquals(carFirst, fetchedCarFirst);
         assertEquals(carSecond, fetchedCarSecond);
     }
+
+    @Test
+    public void should_return_nothing_catch_exception_when_fetch_car_given_wrong_ticket() {
+        //Given
+        ParkingLot parkingLot = new ParkingLot();
+        PackingBoy packingBoy = new PackingBoy(parkingLot);
+        Ticket wrongTicket = new Ticket();
+        //Then
+        assertThrows(ParkingException.class, () -> packingBoy.fetch(wrongTicket), ParkingLot.UNRECOGNIZED_PARKING_TICKET);
+    }
+
+
 }
