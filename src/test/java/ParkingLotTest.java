@@ -1,5 +1,8 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkingLotTest {
@@ -65,6 +68,20 @@ public class ParkingLotTest {
         Car fetchedCarUsed = parkingLot.fetch(usedTicket);
         //Then
         assertNull(fetchedCarUsed);
+    }
+
+    @Test
+    public void should_return_nothing_when_parking_car_given_parking_lot(){
+        //Given
+        ParkingLot parkingLot = new ParkingLot();
+        for (int i = 0; i < 10; i++) {
+            parkingLot.park(new Car());
+        }
+        Car car = new Car();
+        //When
+        Ticket ticket = parkingLot.park(car);
+        //Then
+        assertNull(ticket);
     }
 
 }
