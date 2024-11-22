@@ -69,5 +69,18 @@ public class ParkingBoy {
         assertThrows(ParkingException.class, () -> packingBoy.fetch(usedTicket), ParkingLot.UNRECOGNIZED_PARKING_TICKET);
     }
 
+    @Test
+    public void should_return_nothing_catch_parking_exception_when_parking_car_given_parking_lot() {
+        //Given
+        ParkingLot parkingLot = new ParkingLot();
+        PackingBoy packingBoy = new PackingBoy(parkingLot);
+        Car car = new Car();
+        //When
+        for (int i = 0; i < 10; i++) {
+            packingBoy.park(new Car());
+        }
+        //Then
+        assertThrows(ParkingException.class, () -> packingBoy.park(car), ParkingLot.NO_AVAILABLE_POSITION);
+    }
 
 }
