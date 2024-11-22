@@ -10,6 +10,6 @@ public class ParkingLot {
     }
 
     public Car fetch(Ticket ticket) {
-        return parkingRecords.getOrDefault(ticket,null);
+        return parkingRecords.remove(ticket);
     }
 }
