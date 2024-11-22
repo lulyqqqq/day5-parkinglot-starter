@@ -1,11 +1,10 @@
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 public class ParkingLot {
     public static final int Max_Capacity = 10;
-    public static final String UNRECOGNIZED_PARKING_TICKET = "Unrecognized parking ticket";
-    public static final String NO_AVAILABLE_POSITION = "No available position";
+
+
     private Map<Ticket, Car> parkingRecords = new HashMap<>();
     public int capacity;
     public int parkingLotId;
@@ -31,7 +30,7 @@ public class ParkingLot {
 
     public Ticket park(Car car) {
         if (isCapacityFull()) {
-            throw new ParkingException(NO_AVAILABLE_POSITION) ;
+            throw new NoAvailablePositionException();
         }
         Ticket ticket = new Ticket();
         ticket.setParkingLotId(parkingLotId);
@@ -43,7 +42,7 @@ public class ParkingLot {
     public Car fetch(Ticket ticket){
         capacity++;
         if (!parkingRecords.containsKey(ticket)) {
-            throw new ParkingException(UNRECOGNIZED_PARKING_TICKET);
+            throw new UnrecognizedParkingTicketException();
         }
 
         return parkingRecords.remove(ticket);

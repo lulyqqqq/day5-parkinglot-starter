@@ -7,8 +7,8 @@ public class ParkingLotMultipleTest {
     @Test
     public void should_return_parking_lot_one_when_parking_car_and_parking_not_fill_given_a_car(){
         //Given
-        ParkingLot firstParkingLot = new ParkingLot();
-        ParkingLot secondParkingLot = new ParkingLot();
+        ParkingLot firstParkingLot = new ParkingLot(1);
+        ParkingLot secondParkingLot = new ParkingLot(2);
         PackingBoy packingBoy = new PackingBoy(firstParkingLot);
         packingBoy.addParkingLots(secondParkingLot);
         Car car=  new Car();

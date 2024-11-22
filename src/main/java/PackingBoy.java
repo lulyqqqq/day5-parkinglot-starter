@@ -10,7 +10,7 @@ public class PackingBoy {
         }
     }
 
-    public Ticket park(Car car) throws ParkingException{
+    public Ticket park(Car car){
         Optional<ParkingLot> hasPositionParkingLot = parkingLots.stream()
                 .filter(parkingLot -> !parkingLot.isCapacityFull())
                 .findFirst();
@@ -18,18 +18,18 @@ public class PackingBoy {
         if (hasPositionParkingLot.isPresent()){
             return hasPositionParkingLot.get().park(car);
         }else {
-            throw new ParkingException("No available position");
+            throw new NoAvailablePositionException();
         }
     }
 
-    public Car fetch(Ticket ticket) throws ParkingException{
+    public Car fetch(Ticket ticket) {
         Optional<ParkingLot> matchParkingLot = parkingLots.stream()
                 .filter(parkingLot -> parkingLot.isMatchParkingLot(ticket))
                 .findFirst();
         if (matchParkingLot.isPresent()){
             return matchParkingLot.get().fetch(ticket);
         }else {
-            throw new ParkingException("Unrecognized parking ticket");
+            throw new UnrecognizedParkingTicketException();
         }
     }
 
