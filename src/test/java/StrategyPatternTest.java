@@ -28,4 +28,27 @@ public class StrategyPatternTest {
         assertEquals(car,fetchedCar);
         assertEquals(firstParkingLot.parkingLotId,ticket.getParkingLotId());
     }
+
+    @Test
+    public void should_return_ticket_when_using_default_parking_boy_strategy() {
+        //Given
+        ParkingLot firstParkingLot = new ParkingLot(1);
+        ParkingLot secondParkingLot = new ParkingLot(2);
+        PackingBoy packingBoy = new PackingBoy(firstParkingLot);
+        packingBoy.addParkingLots(secondParkingLot);
+        Car car=  new Car();
+        //When
+        for (int i = 0; i < 10; i++) {
+            packingBoy.parkInSpecificParkingLot(new Car(),1);
+        }
+        Ticket ticket = packingBoy.park(car);
+
+        Car fetchedCar = packingBoy.fetch(ticket);
+
+        //Then
+        assertEquals(car,fetchedCar);
+        assertEquals(secondParkingLot.parkingLotId,ticket.getParkingLotId());
+    }
+
+
 }
