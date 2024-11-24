@@ -95,14 +95,14 @@ public class SmartParkingBoyTest {
         //Given
         ParkingLot firstParkingLot = new ParkingLot(1);
         ParkingLot secondParkingLot = new ParkingLot(2);
-        PackingBoy packingBoy = new PackingBoy(firstParkingLot);
-        packingBoy.addParkingLots(secondParkingLot);
+        PackingBoy smartParkingBoy = new SmartParkingBoy(firstParkingLot);
+        smartParkingBoy.addParkingLots(secondParkingLot);
         Car car =  new Car();
         //When
-        Ticket ticket = packingBoy.park(car);
-        packingBoy.fetch(ticket);
+        Ticket ticket = smartParkingBoy.park(car);
+        smartParkingBoy.fetch(ticket);
 
         //Then
-        assertThrows(UnrecognizedParkingTicketException.class, () -> packingBoy.fetch(ticket), UnrecognizedParkingTicketException.UNRECOGNIZED_PARKING_TICKET);
+        assertThrows(UnrecognizedParkingTicketException.class, () -> smartParkingBoy.fetch(ticket), UnrecognizedParkingTicketException.UNRECOGNIZED_PARKING_TICKET);
     }
 }
