@@ -117,9 +117,4 @@ public class ParkingLotMultipleTest {
         //Then
         assertThrows(NoAvailablePositionException.class, () -> packingBoy.park(car), NoAvailablePositionException.NO_AVAILABLE_POSITION);
     }
-
-
-
-
-
 }
