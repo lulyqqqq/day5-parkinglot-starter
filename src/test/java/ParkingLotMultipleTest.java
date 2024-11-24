@@ -55,13 +55,13 @@ public class ParkingLotMultipleTest {
         Ticket ticketFirst = packingBoy.park(car);
         Car fetchedCarFirst = packingBoy.fetch(ticketFirst);
 
-        for (int i = 0; i < 10; i++) {
-            packingBoy.park(new Car());
-        }
-
         //Then
         assertEquals(car,fetchedCarFirst);
         assertEquals(firstParkingLot.parkingLotId,ticketFirst.getParkingLotId());
+
+        for (int i = 0; i < 10; i++) {
+            packingBoy.park(new Car());
+        }
 
         Ticket ticketSecond = packingBoy.park(car);
         Car fetchedCarSecond = packingBoy.fetch(ticketSecond);
