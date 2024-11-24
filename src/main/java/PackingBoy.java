@@ -4,22 +4,31 @@ import java.util.Optional;
 
 public class PackingBoy {
     protected List<ParkingLot> parkingLots = new ArrayList<>();
+    private ParkingStrategy parkingStrategy = new EarliestParkingLotStrategy();
+
+    public List<ParkingLot> getParkingLots() {
+        return parkingLots;
+    }
+
     public PackingBoy(ParkingLot parkingLot){
         if (parkingLot!=null){
             parkingLots.add(parkingLot);
         }
     }
 
-    public Ticket park(Car car){
-        Optional<ParkingLot> hasPositionParkingLot = parkingLots.stream()
-                .filter(parkingLot -> !parkingLot.isCapacityFull())
-                .findFirst();
+    public void setParkingStrategy(ParkingStrategy parkingStrategy) {
+        this.parkingStrategy = parkingStrategy;
+    }
 
-        if (hasPositionParkingLot.isPresent()){
-            return hasPositionParkingLot.get().park(car);
-        }else {
-            throw new NoAvailablePositionException();
+    public PackingBoy(ParkingLot parkingLot, ParkingStrategy parkingStrategy) {
+        this.parkingStrategy = parkingStrategy;
+        if (parkingLot != null) {
+            parkingLots.add(parkingLot);
         }
+    }
+
+    public Ticket park(Car car) {
+        return parkingStrategy.park(car, this);
     }
 
     public Ticket parkInSpecificParkingLot(Car car, int parkingLotId) {
