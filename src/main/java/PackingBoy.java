@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class PackingBoy {
+    public static final String INVALID_PARKING_LOT_ID = "Invalid ParkingLot ID: ";
     protected List<ParkingLot> parkingLots = new ArrayList<>();
     private ParkingStrategy parkingStrategy = new EarliestParkingLotStrategy();
 
@@ -44,7 +45,7 @@ public class PackingBoy {
                 throw new NoAvailablePositionException();
             }
         } else {
-            throw new IllegalArgumentException("Invalid ParkingLot ID: " + parkingLotId);
+            throw new IllegalArgumentException(INVALID_PARKING_LOT_ID + parkingLotId);
         }
     }
 
