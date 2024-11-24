@@ -2,7 +2,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ParkingLot {
-    public static final int Max_Capacity = 10;
+    public int maxCapacity = 10;
     private Map<Ticket, Car> parkingRecords = new HashMap<>();
     public int capacity;
     public int parkingLotId;
@@ -12,13 +12,22 @@ public class ParkingLot {
     }
 
     public ParkingLot() {
-        capacity = Max_Capacity;
+        capacity = maxCapacity;
     }
 
-
     public ParkingLot(int parkingLotId){
-        capacity = Max_Capacity;
+        capacity = maxCapacity;
         this.parkingLotId = parkingLotId;
+    }
+
+    public ParkingLot(int parkingLotId, int capacity) {
+        this.capacity = capacity;
+        this.maxCapacity = capacity;
+        this.parkingLotId = parkingLotId;
+    }
+
+    public double getAvailabilityRate() {
+        return (double) (maxCapacity - capacity) / maxCapacity;
     }
 
     public boolean isMatchParkingLot(Ticket ticket){
@@ -28,7 +37,6 @@ public class ParkingLot {
     public boolean isCapacityFull() {
         return capacity == 0;
     }
-
 
     public Ticket park(Car car) {
         if (isCapacityFull()) {
