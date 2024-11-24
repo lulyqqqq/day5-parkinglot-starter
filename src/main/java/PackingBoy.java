@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class PackingBoy {
-    private List<ParkingLot> parkingLots = new ArrayList<>();
+    protected List<ParkingLot> parkingLots = new ArrayList<>();
     public PackingBoy(ParkingLot parkingLot){
         if (parkingLot!=null){
             parkingLots.add(parkingLot);
@@ -19,6 +19,23 @@ public class PackingBoy {
             return hasPositionParkingLot.get().park(car);
         }else {
             throw new NoAvailablePositionException();
+        }
+    }
+
+    public Ticket parkInSpecificParkingLot(Car car, int parkingLotId) {
+        Optional<ParkingLot> targetParkingLot = parkingLots.stream()
+                .filter(parkingLot -> parkingLot.parkingLotId == parkingLotId)
+                .findFirst();
+
+        if (targetParkingLot.isPresent()) {
+            ParkingLot parkingLot = targetParkingLot.get();
+            if (!parkingLot.isCapacityFull()) {
+                return parkingLot.park(car);
+            } else {
+                throw new NoAvailablePositionException();
+            }
+        } else {
+            throw new IllegalArgumentException("Invalid ParkingLot ID: " + parkingLotId);
         }
     }
 

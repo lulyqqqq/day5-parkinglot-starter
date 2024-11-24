@@ -3,11 +3,13 @@ import java.util.Map;
 
 public class ParkingLot {
     public static final int Max_Capacity = 10;
-
-
     private Map<Ticket, Car> parkingRecords = new HashMap<>();
     public int capacity;
     public int parkingLotId;
+
+    public int getCapacity() {
+        return capacity;
+    }
 
     public ParkingLot() {
         capacity = Max_Capacity;
